@@ -8,7 +8,7 @@ app.secret_key = 'Church Savings'
 # MySQL Configuration
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Aaron123456789'
+app.config['MYSQL_PASSWORD'] = 'Your Password' #Enter your password
 app.config['MYSQL_DB'] = 'church_savings'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
@@ -632,4 +632,5 @@ if __name__ == '__main__':
     print("="*60)
     print("🌐 Open: http://localhost:5000")
     print("="*60 + "\n")
+
     app.run(debug=True, host='0.0.0.0', port=5000)
