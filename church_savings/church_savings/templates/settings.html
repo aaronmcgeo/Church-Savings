@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Church Savings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="header">
+        <h1><i class="fas fa-church"></i> Our Lady of Lourdes Church</h1>
+        <p>Keezha Kattuvilai - Savings Management System</p>
+    </div>
+
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        <strong>{{ message }}</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <a href="{{ url_for('index') }}" class="btn btn-link mb-3">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+
+        <div class="form-container">
+            <div class="form-card">
+                <h2><i class="fas fa-cog"></i> Settings</h2>
+                
+                <div class="alert alert-info mb-4">
+                    <strong><i class="fas fa-user"></i> Username:</strong> {{ session.username }}<br>
+                    <strong><i class="fas fa-shield-alt"></i> Role:</strong> 
+                    {% if session.is_admin %}Administrator (Full Access){% else %}Member (View Only){% endif %}
+                </div>
+
+                <h3 style="margin-bottom: 1rem;"><i class="fas fa-key"></i> Change Password</h3>
+                
+                <form method="POST">
+                    <div class="form-group">
+                        <label class="form-label">Current Password *</label>
+                        <input type="password" name="current_password" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">New Password *</label>
+                        <input type="password" name="new_password" class="form-control" required minlength="3">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Confirm New Password *</label>
+                        <input type="password" name="confirm_password" class="form-control" required>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Update Password
+                        </button>
+                        <a href="{{ url_for('index') }}" class="btn btn-secondary">
+                            <i class="fas fa-times"></i> Cancel
+                        </a>
+                    </div>
+                </form>
+
+                <hr style="margin: 2rem 0;">
+                
+                <div style="text-align: center;">
+                    <a href="{{ url_for('logout') }}" class="btn btn-danger">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
